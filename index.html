@@ -37,6 +37,16 @@ main{max-width:1600px;margin:auto;padding:16px clamp(10px,2.5vw,30px) 34px}.noti
 <article class="card" style="margin-top:12px"><h3>View settings</h3><div class="field"><label for="viewSelect">Camera focus</label><select id="viewSelect"><option value="system">Whole solar system</option><option value="selected">Selected planet</option><option value="earth">Earth & Moon</option></select></div><div class="field"><label for="zoom">Zoom level</label><input id="zoom" type="range" min=".45" max="2.4" step=".01" value="1"></div><div class="switches"><label><input type="checkbox" id="showDistances"> Distance markers</label><label><input type="checkbox" id="showPeriods" checked> Period labels</label></div><p class="small muted">Drag to rotate the viewing angle. Use the wheel or pinch gesture to zoom. Reset restores the camera and clock.</p></article>
 </div></div>
 </section>
+ <section class="panel active" id="explore">
+  <iframe
+    id="exploreFrame"
+    src="https://mahima219.github.io/VR.6/"
+    title="VR Solar System"
+    allow="camera; microphone; fullscreen"
+    allowfullscreen
+    loading="eager"
+  ></iframe>
+</section>
 <section class="panel" id="details"><div class="grid2"><article class="card"><h2>Planet explorer</h2><p class="muted small">Choose a world to open its field guide.</p><div class="field"><label for="planetSelect">Planet</label><select id="planetSelect"></select></div><div id="detailContent"></div></article><article class="card"><h2>Solar system scale</h2><p class="muted">A visual guide to why the model uses two layouts.</p><div id="scaleExplanation"></div><hr class="divider"><h3>Major moons</h3><div id="moonContent" class="description"></div><button class="btn secondary" id="moonSelectBtn">Highlight selected planet's moons</button><div id="moonGallery" style="margin-top:12px"></div></article></div></section>
 <section class="panel" id="compare"><article class="card"><h2>Planet comparison lab</h2><p class="muted small">Compare two planets using approximate reference values. Bars are scaled within each property for readability.</p><div class="form-row"><div class="field"><label for="compareA">Planet A</label><select id="compareA"></select></div><div class="field"><label for="compareB">Planet B</label><select id="compareB"></select></div></div><button class="btn secondary" id="earthQuick">Set Earth as Planet B</button><div id="comparison" style="margin-top:14px"></div><div class="tip" style="margin-top:12px">Temperature is a typical average/representative value; giant planets have no solid surface, so figures are approximate cloud-top or atmospheric values.</div></article></section>
 <section class="panel" id="learn"><div class="lesson-layout"><article class="card"><h2>Guided tour</h2><p class="muted small">Select a chapter to explore the universe step by step.</p><div id="lessonList" class="lesson-list"></div><hr class="divider"><div class="bar-label"><span>Tour progress</span><strong id="lessonProgressText">0 / 10</strong></div><div class="progress"><span id="lessonProgress"></span></div></article><article class="card lesson-body"><div class="small muted" id="lessonKicker">CHAPTER 1</div><h2 id="lessonTitle" style="font-size:24px;margin-top:4px">The Sun: our star</h2><div id="lessonText"></div><div class="actions"><button class="btn secondary" id="lessonPrev">← Previous</button><button class="btn" id="lessonNext">Next chapter →</button><button class="btn soft" id="lessonExplore">Explore this object</button></div></article></div></section>
@@ -165,6 +175,28 @@ function init(){
  window.addEventListener('resize',()=>{resizeCanvas();draw()});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('presentation'))togglePresentation();if(e.key===' '&&!['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();$('playBtn').click()}});window.addEventListener('beforeunload',()=>{if(cameraStream)cameraStream.getTracks().forEach(t=>t.stop())});
  document.querySelectorAll('[data-part]').forEach(el=>{const act=()=>{let p=el.dataset.part;if(planets.some(x=>x.id===p))selectPlanet(p);setTab('learn');let idx=p==='sun'?0:p==='earth'?2:p==='jupiter'?4:p==='neptune'?5:6;lessonIndex=idx;renderLesson()};el.addEventListener('click',act);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();act()}})});
  $('scaleExplanation').innerHTML='';updateInfo();resizeCanvas();renderDetails();renderComparison();renderLesson();renderQuiz();requestAnimationFrame(tick);
+ #explore {
+  width: 100%;
+  height: calc(100vh - 180px);
+  min-height: 600px;
+  padding: 0;
+}
+
+#exploreFrame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  border-radius: 12px;
+  background: #070d1d;
+}
+
+@media (max-width: 650px) {
+  #explore {
+    height: calc(100vh - 150px);
+    min-height: 480px;
+  }
+}
 }
 init();
 })();
