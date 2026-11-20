@@ -21,7 +21,11 @@ main{max-width:1600px;margin:auto;padding:16px clamp(10px,2.5vw,30px) 34px}.noti
 <section class="panel active" id="explore">
 <div class="workspace">
 <div>
-<div class="viewport" id="viewport"><video id="cameraFeed" autoplay playsinline muted></video><canvas id="space" aria-label="Interactive solar system. Select planets by tapping or clicking."></canvas><span class="space-badge" id="modeBadge">COMPACT ORBIT VIEW</span><div class="view-tools"><button class="tool" id="layoutBtn">Compact / Real distance</button><button class="tool" id="pathsBtn">Hide orbits</button><button class="tool" id="labelsBtn">Hide labels</button><button class="tool" id="arModeBtn">◎ Camera AR</button><button class="tool" id="soundBtn">♫ Sound off</button><button class="tool" id="presentBtn">⛶ Present</button></div><div class="tap-info" id="tapInfo" role="status" aria-live="polite"></div><div class="viewport-tip">Tap the Sun or any planet for quick facts · Drag to rotate · Pinch or wheel to zoom</div></div>
+<iframe
+  src="https://mahima219.github.io/VR.6/"
+  title="Example embedded scene"
+  style="display:block;width:100%;height:650px;border:0"
+></iframe>
 <div class="bottom-controls"><button class="btn" id="playBtn">Ⅱ Pause</button><button class="btn secondary" id="slower">− Slower</button><button class="btn secondary" id="faster">+ Faster</button><div class="speed-control"><label for="speed">TIME SPEED</label><input id="speed" type="range" min=".1" max="100" step=".1" value="8"><strong id="speedVal">8.0×</strong></div><button class="btn soft" id="reset">↺ Reset</button></div>
 <div class="readouts"><div class="readout"><label>Simulation elapsed</label><strong id="elapsed">Day 0</strong></div><div class="readout"><label>Simulation date</label><strong id="simDate">2026-01-01</strong></div><div class="readout"><label>Selected orbit angle</label><strong id="angleRead">0°</strong></div><div class="readout"><label>Earth distance</label><strong id="earthDist">— AU</strong></div></div>
 </div>
